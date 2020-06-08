@@ -280,6 +280,9 @@ func ValidateNodeGroupLabels(labels map[string]string) error {
 
 func isKubernetesLabel(namespace string) bool {
 	for _, domain := range []string{"kubernetes.io", "k8s.io"} {
+		if (namespace == "node.kubernetes.io" || namespace == "node-role.kubernetes.io") {
+			return false
+		}
 		if namespace == domain || strings.HasSuffix(namespace, "."+domain) {
 			return true
 		}
